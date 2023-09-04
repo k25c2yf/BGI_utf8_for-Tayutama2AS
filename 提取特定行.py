@@ -8,7 +8,7 @@ def extract_specific_lines(input_file, output_file):
     extracted_lines = []
     for line in lines:
         line = line.strip()
-        if len(line) <= 15 and not any(word in line for word in ['「', '」', '、', '…', '°' , '。']):
+        if len(line) <= 22 and not any(word in line for word in ['『' , '（' ,'─' ,  '！' , '―' , '「', '」', '、', '…', '°' , '。']):
             extracted_lines.append(line)
 
     with open(output_file, 'w', encoding='utf-8') as file:

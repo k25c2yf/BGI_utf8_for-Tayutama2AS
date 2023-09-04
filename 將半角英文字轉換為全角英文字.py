@@ -39,4 +39,4 @@ def convert_file(file_path):
         file.write(converted_content)
 
 # 執行轉換
-convert_directory("./TXT")  # 將 "目錄的路徑" 替換為實際的目錄路徑
+convert_directory("./big5")  # 將 "目錄的路徑" 替換為實際的目錄路徑

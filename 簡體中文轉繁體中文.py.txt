@@ -1,3 +1,4 @@
+#	本漢化基本為繁體製作，簡回轉繁體請檢查用詞
 import os
 import opencc
 
@@ -5,8 +6,8 @@ import opencc
 converter = opencc.OpenCC('s2t')  # 簡體中文轉繁體中文
 
 # 設定原始資料夾和目標資料夾路徑
-src_dir = './big5'
-dst_dir = './big5V1'
+src_dir = './gb'
+dst_dir = './big5'
 
 # 檢查目標資料夾是否存在，如果不存在則建立目標資料夾
 if not os.path.exists(dst_dir):
@@ -17,7 +18,7 @@ for file_name in os.listdir(src_dir):
     if file_name.endswith('.txt'):
         # 讀取原始檔案內容
         src_path = os.path.join(src_dir, file_name)
-        with open(src_path, 'r', encoding='utf-16-le') as f:
+        with open(src_path, 'r', encoding='utf-8') as f:
             content = f.read()
 
         # 執行簡繁轉換
@@ -25,5 +26,5 @@ for file_name in os.listdir(src_dir):
 
         # 寫入轉換後的檔案到目標資料夾
         dst_path = os.path.join(dst_dir, file_name)
-        with open(dst_path, 'w', encoding='utf-16-le') as f:
+        with open(dst_path, 'w', encoding='utf-8') as f:
             f.write(content)

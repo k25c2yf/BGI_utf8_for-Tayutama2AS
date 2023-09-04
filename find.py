@@ -1,6 +1,6 @@
 import os
 
-search_string = "」東武海斗」"
+search_string = "喫"
 folder_path = "./big5"
 
 # 設置文件編碼為utf-16 LE,utf-16-le,Shift-JIS
