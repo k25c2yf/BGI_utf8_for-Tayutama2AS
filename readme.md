@@ -62,5 +62,5 @@ Lump of sugar是 方糖社 lumpofsugar.co.jp 的商标
 占位符，在本处内容文本补全之前，本仓库的所有内容请勿用于任何其他用途，仅允许个人测试使用，禁止一切转载与二次分发
 
 ## Author
-项目发起者 [k25c2yf](https://github.com/k25c2yf)
-校对&管理 [KJZH001](https://github.com/KJZH001)
+- 项目发起者 [k25c2yf](https://github.com/k25c2yf)
+- 校对&管理 [KJZH001](https://github.com/KJZH001)
