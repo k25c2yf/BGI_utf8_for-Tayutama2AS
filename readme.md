@@ -1,6 +1,6 @@
 ![封面](cover%20by%20KJZH001.png)
 
-合成 by KJZH001
+合成制作 by KJZH001
 
 素材来源于lumpofsugar.co.jp 版权归属方糖社所有
 
