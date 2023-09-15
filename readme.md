@@ -10,7 +10,7 @@ Lump of sugar是 方糖社 lumpofsugar.co.jp 的商标
 
 # 游魂2 FD - After Stories -  开源汉化补丁
 
-语言：简体中文 | [正體中文]()
+语言：[简体中文](readme.md) | [正體中文](readme_zh-TW.md)
 
 注意：所有的项目自述文件或其他相关内容的更新请以简体中文版本为主，繁体中文版本更新会存在一定延迟
 

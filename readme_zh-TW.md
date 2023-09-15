@@ -10,7 +10,7 @@ Lump of sugar是方糖社lumpofsugar.co.jp的商標
 
 # 遊魂2 FD - After Stories - 開源繁化補丁
 
-語言：簡體中文 | [正體中文]()
+語言：[简体中文](readme.md) | [正體中文](readme_zh-TW.md)
 
 注意：所有的項目自述文件或其他相關內容的更新請以簡體中文版本為主，繁體中文版本更新會存在一定延遲
 
