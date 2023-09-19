@@ -79,7 +79,7 @@ python BGIScriptRepackerV2.py ./source/xc02h ./big5/xc02h_tc.txt ./temp/xc02h
 python BGIScriptRepackerV2.py ./source/xd01 ./big5/xd01_tc.txt ./temp/xd01
 python BGIScriptRepackerV2.py ./source/xd02 ./big5/xd02_tc.txt ./temp/xd02
 python BGIScriptRepackerV2.py ./source/xd02h ./big5/xd02h_tc.txt ./temp/xd02h
-python BGIScriptRepackerV2.py ./source/MakerLogo ./big5/MakerLogo.txt ./temp/MakerLogo
+python BGIScriptRepackerV2.py ./source/MakerLogo ./big5/MakerLogo.txt ./outputbig5/MakerLogo
 
 
 python BGIScriptRepackerV2.py ./temp/101 ./jp/jpname/jp_101.txt ./outputbig5/101
