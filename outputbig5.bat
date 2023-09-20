@@ -167,7 +167,7 @@ python BGIScriptRepackerV2.py ./temp/xd02h ./jp/jpname/jp_xd02h.txt ./outputbig5
 
 
 copy .\BIG5PIC\name\*.bmp .\temp
-BGIBmpConverterV2.py ./temp
+python BGIBmpConverterV2.py ./temp
 copy .\temp\*.out .\outputbig5
 ren .\outputbig5\*.out *.
 ren .\outputbig5\*.bmp *.
