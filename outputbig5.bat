@@ -1,3 +1,4 @@
+del /q .\temp\*.*
 python BGIScriptRepackerV2.py ./source/101 ./big5/101_TC.txt ./temp/101
 python BGIScriptRepackerV2.py ./source/102 ./big5/102_TC.txt ./temp/102
 python BGIScriptRepackerV2.py ./source/102c ./big5/102c_TC.txt ./temp/102c
@@ -164,6 +165,14 @@ python BGIScriptRepackerV2.py ./temp/xd01 ./jp/jpname/jp_xd01.txt ./outputbig5/x
 python BGIScriptRepackerV2.py ./temp/xd02 ./jp/jpname/jp_xd02.txt ./outputbig5/xd02
 python BGIScriptRepackerV2.py ./temp/xd02h ./jp/jpname/jp_xd02h.txt ./outputbig5/xd02h
 
+
+copy .\BIG5PIC\name\*.bmp .\temp
+BGIBmpConverterV2.py ./temp
+copy .\temp\*.out .\outputbig5
+ren .\outputbig5\*.out *.
+ren .\outputbig5\*.bmp *.
+
+copy .\sysprg\*._bp .\outputbig5
 
 
 @pause
