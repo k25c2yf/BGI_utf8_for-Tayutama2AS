@@ -9,7 +9,7 @@
  - 105_TC.txt
  - 106_TC.txt
  - 107_TC.txt
- - 10a_TC.txt
+ - 10a_TC.txt done
  - 10b_TC.txt
  - 10d_TC.txt
  - 201_TC.txt
@@ -43,7 +43,7 @@
  - e01_3_TC.txt
  - e01_4_TC.txt
  - e01_5_TC.txt
- - e01_6_TC.txt
+ - e01_6_TC.txt done/人稱注意 くーちゃん和まろ子
  - e02_1_TC.txt
  - e02_2_TC.txt
  - e02_3_TC.txt
