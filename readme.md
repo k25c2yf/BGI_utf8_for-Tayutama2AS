@@ -45,6 +45,10 @@ Lump of sugar是 方糖社 lumpofsugar.co.jp 的商标
 
 **“阿勒!? 我的胖次不见了！”**
 
+> 翻译文本摘取自 [百度百科](https://baike.baidu.com/item/%E6%B8%B8%E9%AD%822%20-After%20Stories-/23558247#reference-4-24079605-wrap)
+> 
+> 原文 [方糖社官网](https://www.lumpofsugar.co.jp/product/tayutama2_as/story/index.html)
+
 ## 年龄分级提醒
 
 警告！本游戏文本中包含有18+内容
