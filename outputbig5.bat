@@ -1,4 +1,5 @@
 del /q .\temp\*.*
+del /q .\outputbig5\*.*
 python BGIScriptRepackerV2.py ./source/101 ./big5/101_TC.txt ./temp/101
 python BGIScriptRepackerV2.py ./source/102 ./big5/102_TC.txt ./temp/102
 python BGIScriptRepackerV2.py ./source/102c ./big5/102c_TC.txt ./temp/102c
@@ -167,6 +168,7 @@ python BGIScriptRepackerV2.py ./temp/xd02h ./jp/jpname/jp_xd02h.txt ./outputbig5
 
 
 copy .\BIG5PIC\name\*.bmp .\temp
+copy .\BIG5PIC\menu\*.bmp .\temp
 python BGIBmpConverterV2.py ./temp
 copy .\temp\*.out .\outputbig5
 ren .\outputbig5\*.out *.
