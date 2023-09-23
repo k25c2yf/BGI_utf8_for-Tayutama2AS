@@ -3,7 +3,7 @@
  - 101_TC.txt done
  - 102c_TC.txt done
  - 102e_TC.txt
- - 102_TC.txt
+ - 102_TC.txt done
  - 103_TC.txt
  - 104_TC.txt done
  - 105_TC.txt
