@@ -1,6 +1,6 @@
 ## 本文件用於記錄人工校對的漢化進度
 
- - 101_TC.txt
+ - 101_TC.txt done
  - 102c_TC.txt
  - 102e_TC.txt
  - 102_TC.txt
