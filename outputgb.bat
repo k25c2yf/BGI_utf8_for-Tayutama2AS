@@ -168,6 +168,7 @@ python BGIScriptRepackerV2.py ./temp/xd02h ./jp/jpname/jp_xd02h.txt ./outputgbk/
 
 copy .\BIG5PIC\name\*.bmp .\temp
 copy .\GBKPIC\menu\*.bmp .\temp
+copy .\GBKPIC\SGCnf\*.bmp .\temp
 copy /y .\GBKPIC\name\*.bmp .\temp
 python BGIBmpConverterV2.py ./temp
 copy .\temp\*.out .\outputgbk
