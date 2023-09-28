@@ -171,6 +171,7 @@ copy .\BIG5PIC\name\*.bmp .\temp
 copy .\BIG5PIC\menu\*.bmp .\temp
 copy .\BIG5PIC\SGCnf\*.bmp .\temp
 copy .\BIG5PIC\A\*.bmp .\temp
+copy .\BIG5PIC\B\*.bmp .\temp
 python BGIBmpConverterV2.py ./temp
 copy .\temp\*.out .\outputbig5
 ren .\outputbig5\*.out *.

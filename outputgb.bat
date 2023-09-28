@@ -171,6 +171,7 @@ copy .\GBKPIC\menu\*.bmp .\temp
 copy .\GBKPIC\SGCnf\*.bmp .\temp
 copy .\GBKPIC\name\*.bmp .\temp
 copy .\GBKPIC\A\*.bmp .\temp
+copy .\BIG5PIC\B\*.bmp .\temp
 python BGIBmpConverterV2.py ./temp
 copy .\temp\*.out .\outputgbk
 ren .\outputgbk\*.out *.
