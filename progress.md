@@ -6,7 +6,7 @@
  - 102_TC.txt done
  - 103_TC.txt done
  - 104_TC.txt done
- - 105_TC.txt
+ - 105_TC.txt done
  - 106_TC.txt
  - 107_TC.txt
  - 10a_TC.txt done
