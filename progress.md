@@ -64,21 +64,21 @@
  - e04_6_TC.txt
  - e04_7_TC.txt
  - e04_8_TC.txt
- - e04_9H_tc.txt
+ - e04_9H_tc.txt none
  - e05_1_TC.txt
  - e05_2h_tc.txt
  - e05_3_TC.txt
  - f01_TC.txt
  - MakerLogo.txt
- - xa01h_tc.txt
+ - xa01h_tc.txt none
  - xa01_TC.txt
  - xa02_TC.txt
- - xb01h_tc.txt
+ - xb01h_tc.txt none
  - xb01_TC.txt
  - xb02_TC.txt
  - xc01_TC.txt
- - xc02h_tc.txt
+ - xc02h_tc.txt none
  - xc02_TC.txt
  - xd01_TC.txt
- - xd02h_tc.txt
+ - xd02h_tc.txt none
  - xd02_TC.txt
