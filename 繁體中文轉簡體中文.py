@@ -1,29 +1,34 @@
 import os
 import opencc
 
-# 設定轉換器
-converter = opencc.OpenCC('t2s')  # 繁體中文轉簡體中文
+# 指定繁体转简体的配置文件路径
+# 你可以根据需要选择不同的配置文件，比如s2t.json表示繁体转简体
+config_file = 's2t'
 
-# 設定原始資料夾和目標資料夾路徑
-src_dir = './big5'
-dst_dir = './gbk'
+# 源目录和目标目录
+source_dir = './big5'
+target_dir = './gbk'
 
-# 檢查目標資料夾是否存在，如果不存在則建立目標資料夾
-if not os.path.exists(dst_dir):
-    os.makedirs(dst_dir)
+# 创建转换器对象
+converter = opencc.OpenCC(config_file)
 
-# 處理所有的*.txt檔案
-for file_name in os.listdir(src_dir):
-    if file_name.endswith('.txt'):
-        # 讀取原始檔案內容
-        src_path = os.path.join(src_dir, file_name)
-        with open(src_path, 'r', encoding='utf-8') as f:
-            content = f.read()
+# 遍历源目录中的所有.txt文件
+for filename in os.listdir(source_dir):
+    if filename.endswith('.txt'):
+        source_path = os.path.join(source_dir, filename)
+        target_path = os.path.join(target_dir, filename)
 
-        # 執行繁簡轉換
-        content = converter.convert(content)
+        # 打开源文件和目标文件
+        with open(source_path, 'r', encoding='utf-8') as source_file:
+            source_text = source_file.read()
+        
+        # 使用转换器将繁体文本转换为简体
+        simplified_text = converter.convert(source_text)
 
-        # 寫入轉換後的檔案到目標資料夾
-        dst_path = os.path.join(dst_dir, file_name)
-        with open(dst_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+        # 将简体文本写入目标文件
+        with open(target_path, 'w', encoding='utf-8') as target_file:
+            target_file.write(simplified_text)
+
+        print(f'转换完成：{source_path} -> {target_path}')
+
+print('全部转换完成！')
