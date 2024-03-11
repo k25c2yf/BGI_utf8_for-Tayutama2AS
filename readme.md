@@ -1,4 +1,4 @@
-![封面](cover%20by%20KJZH001.png)
+![封面](cover-1%20by%20KJZH001.png)
 
 合成制作 by KJZH001
 
