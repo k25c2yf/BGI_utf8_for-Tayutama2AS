@@ -8,7 +8,7 @@ Lump of sugar是 方糖社 lumpofsugar.co.jp 的商标
 
 如有侵权请发送issue申请删除，封面图像保留禁止转载的权利
 
-# 游魂2 FD - After Stories -  开源汉化补丁
+# 夏梦方糖社同好会<br>游魂2 FD - After Stories -  开源汉化补丁
 
 语言：[简体中文](readme.md) | [正體中文](readme_zh-TW.md)
 
