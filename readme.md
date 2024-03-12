@@ -1,4 +1,4 @@
-![封面](cover%20by%20KJZH001.png)
+![封面](cover-1%20by%20KJZH001.png)
 
 合成制作 by KJZH001
 
@@ -8,11 +8,15 @@ Lump of sugar是 方糖社 lumpofsugar.co.jp 的商标
 
 如有侵权请发送issue申请删除，封面图像保留禁止转载的权利
 
-# 游魂2 FD - After Stories -  开源汉化补丁
+# 夏梦方糖社同好会<br>游魂2 FD - After Stories -  开源汉化补丁
 
 语言：[简体中文](readme.md) | [正體中文](readme_zh-TW.md)
 
 注意：所有的项目自述文件或其他相关内容的更新请以简体中文版本为主，繁体中文版本更新会存在一定延迟
+
+**但是，这里的相关内容不包括游戏的台词文本，台词文本会优先使用繁中进行汉化处理**
+
+ps.这是由于相比简中转繁中，明显繁中转简中的错误率会低很多，仅此而已
 
 ## 介绍
 
@@ -124,10 +128,21 @@ GNU AGPL 要求在派生作品中保留原始软件的许可证和源代码信�
 因此，派生的分支名称的选择可能需要遵循通用的开源软件命名规范，以避免混淆和冲突。
 ```
 
-此外，本仓库的所有内容请勿用于任何其他用途，仅允许个人测试使用，禁止一切转载与二次分发
+此外，本仓库的所有内容请勿用于任何其他用途，仅允许个人测试、学习和交流使用，禁止一切转载与二次分发
+
+## 下载地址
+Github https://github.com/k25c2yf/BGI_utf8_for-Tayutama2AS/releases
+
+百度网盘 https://pan.baidu.com/s/1VZ0s5sePSZCYs69NdZglkQ?pwd=8888 提取码: 8888
+
+2dfan https://2dfan.com/downloads/19963
+
+一旦您下载和使用了来自本仓库或者其他分发渠道的补丁（包括他人二次转载的），我们都视为您已经完全阅读并理解和认同本文以及接受上述所有的免责声明和条款
+
+否则，请立即删除这些文件，并且关闭相关的页面且不再浏览
 
 ## Author
 
 - 项目发起者 [k25c2yf](https://github.com/k25c2yf)
 - 校对&管理 [KJZH001](https://github.com/KJZH001)
-- 校对 [Akane-Haruka](https://github.com/Akane-Haruka)
+- 校对&翻译 [Akane-Haruka](https://github.com/Akane-Haruka)
