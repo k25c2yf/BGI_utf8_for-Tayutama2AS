@@ -9,6 +9,7 @@ Lump of sugar是 方糖社 lumpofsugar.co.jp 的商标
 如有侵权请发送issue申请删除，封面图像保留禁止转载的权利
 
 # 夏梦方糖社同好会<br>游魂2 FD - After Stories -  开源汉化补丁
+(BiliBili)开场动画：[【中字OP】「游魂2-After Stories-」开场动画](https://www.bilibili.com/video/av1052626551/)
 
 语言：[简体中文](readme.md) | [正體中文](readme_zh-TW.md)
 
@@ -148,3 +149,4 @@ ps.内部预定发版日期为2024.3.10日，github发版日期为3.11，因此�
 - 项目发起者 [k25c2yf](https://github.com/k25c2yf)
 - 校对&管理 [KJZH001](https://github.com/KJZH001)
 - 校对&翻译 [Akane-Haruka](https://github.com/Akane-Haruka)
+- OP 时轴\后期：[丨Pegasus丨](https://space.bilibili.com/33339833)
