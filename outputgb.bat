@@ -172,5 +172,6 @@ python BGIScriptInserter_Lib-jp.py ./temp/xd02h ./jp/jpname/jp_xd02h.txt ./outpu
 
 copy .\GBKPIC\*. .\outputgbk
 copy .\sysprg_gbk\*._bp .\outputgbk
+call mvop1.bat
 
 @pause

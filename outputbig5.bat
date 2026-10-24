@@ -169,6 +169,6 @@ python BGIScriptInserter_Lib-jp.py ./temp/xd02h ./jp/jpname/jp_xd02h.txt ./outpu
 
 copy .\BIG5PIC\*. .\outputbig5
 copy .\sysprg_big5\*._bp .\outputbig5
-
+call mvop.bat
 
 @pause
