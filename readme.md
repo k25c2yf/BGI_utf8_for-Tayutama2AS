@@ -150,3 +150,6 @@ Github https://github.com/k25c2yf/BGI_utf8_for-Tayutama2AS/releases
 - OP 时轴\后期：[丨Pegasus丨](https://space.bilibili.com/33339833)
 
 ## 更新历史
+- 2023.6.16 项目立项
+- 2023.9.5 v1.0.0 TEST 版本发布（仅粗翻）
+- 2023.9.6 第一版校对立项
