@@ -160,3 +160,4 @@ Github https://github.com/k25c2yf/BGI_utf8_for-Tayutama2AS/releases
 - 2026.10.19 后日谈（Episode）汉化完毕
 - 2026.10.21 Debug版补丁确立
 - 2026.10.25 OP汉化补丁发布
+- 2026.11.7 v2.0.0 发布预定
