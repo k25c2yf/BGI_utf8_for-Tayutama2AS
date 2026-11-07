@@ -155,3 +155,8 @@ Github https://github.com/k25c2yf/BGI_utf8_for-Tayutama2AS/releases
 - 2023.9.6 第一版校对立项
 - 2024.3.11 v1.0.3 正式发布（第一版校对）
 - 2024.4.11 BiliBili 汉化版OP发布
+- 2026.10.15 第二版翻译立项
+- 2026.10.17 Grok 粗翻完毕
+- 2026.10.19 后日谈（Episode）汉化完毕
+- 2026.10.21 Debug版补丁确立
+- 2026.10.25 OP汉化补丁发布
