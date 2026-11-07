@@ -1,4 +1,4 @@
-![封面](cover-1%20by%20KJZH001.png)
+![封面](游魂2fd汉化封面-2026.png)
 
 合成制作 by KJZH001
 
@@ -9,7 +9,7 @@ Lump of sugar是 方糖社 lumpofsugar.co.jp 的商标
 如有侵权请发送issue申请删除，封面图像保留禁止转载的权利
 
 # 夏梦方糖社同好会<br>游魂2 FD - After Stories -  开源汉化补丁
-(BiliBili)开场动画：[【中字OP】「游魂2-After Stories-」开场动画](https://www.bilibili.com/video/av1052626551/)
+【BiliBili】开场动画：[【中字OP】「游魂2-After Stories-」开场动画](https://www.bilibili.com/video/av1052626551/)
 
 语言：[简体中文](readme.md) | [正體中文](readme_zh-TW.md)
 
@@ -142,11 +142,22 @@ Github https://github.com/k25c2yf/BGI_utf8_for-Tayutama2AS/releases
 
 否则，请立即删除这些文件，并且关闭相关的页面且不再浏览
 
-ps.内部预定发版日期为2024.3.10日，github发版日期为3.11，因此部分渠道的发布日期会早于或者晚于Github一天左右，请不要因此感到困惑和担心，这些发布的内容都是相同的
-
 ## Author
 
 - 项目发起者 [k25c2yf](https://github.com/k25c2yf)
 - 校对&管理 [KJZH001](https://github.com/KJZH001)
 - 校对&翻译 [Akane-Haruka](https://github.com/Akane-Haruka)
 - OP 时轴\后期：[丨Pegasus丨](https://space.bilibili.com/33339833)
+
+## 更新历史
+- 2023.6.16 项目立项
+- 2023.9.5 v1.0.0 TEST 版本发布（仅粗翻）
+- 2023.9.6 第一版校对立项
+- 2024.3.11 v1.0.3 正式发布（第一版校对）
+- 2024.4.11 BiliBili 汉化版OP发布
+- 2026.10.15 第二版翻译立项
+- 2026.10.17 Grok 粗翻完毕
+- 2026.10.19 后日谈（Episode）汉化完毕
+- 2026.10.21 Debug版补丁确立
+- 2026.10.25 OP汉化补丁发布
+- 2026.11.7 v2.0.0 发布预定
