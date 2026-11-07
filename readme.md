@@ -149,3 +149,4 @@ Github https://github.com/k25c2yf/BGI_utf8_for-Tayutama2AS/releases
 - 校对&翻译 [Akane-Haruka](https://github.com/Akane-Haruka)
 - OP 时轴\后期：[丨Pegasus丨](https://space.bilibili.com/33339833)
 
+## 更新历史
