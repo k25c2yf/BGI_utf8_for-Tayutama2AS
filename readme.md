@@ -153,3 +153,5 @@ Github https://github.com/k25c2yf/BGI_utf8_for-Tayutama2AS/releases
 - 2023.6.16 项目立项
 - 2023.9.5 v1.0.0 TEST 版本发布（仅粗翻）
 - 2023.9.6 第一版校对立项
+- 2024.3.11 v1.0.3 正式发布（第一版校对）
+- 2024.4.11 BiliBili 汉化版OP发布
