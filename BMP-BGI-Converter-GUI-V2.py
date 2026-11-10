@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""BMP / PNG ↔ BGI / CompressedBG 互轉器 GUI，單檔運行。
+"""BMP-BGI-Converter-GUI-V2：BMP / PNG ↔ BGI / CompressedBG 互轉器 GUI，單檔運行。
 
 介面跟 BMP-BGI-Converter-GUI：輸入/輸出、自動或指定方向、預覽、日誌。
 認得 CompressedBG v1/v2，並可以轉返 CompressedBG v1，避免 raw BGI 太大。
 圖像輸出可選帶 Alpha 的 BMP，或 PhotoCraft 開得到的 PNG。
+
+V2：回封 CompressedBG 時保留檔頭 0x18–0x1F 錨點（過場座標）。
+解出 BMP/PNG 時寫同名 .cbgmeta；回封先讀 sidecar，或按檔名向「原 CBG 資料夾」抄。
 """
 from __future__ import annotations
 
@@ -776,7 +779,14 @@ def decode_cbg(data: bytes, label: str = "cbg") -> Tuple[int, int, int, bytes, d
     enc_len = struct.unpack_from("<I", data, 0x28)[0]
     checksum, checkxor = data[0x2C], data[0x2D]
     version = struct.unpack_from("<H", data, 0x2E)[0]
-    meta = {"version": version, "key": key, "compressed": True}
+    a18, b18, ax, ay = struct.unpack_from("<HHHH", data, 0x18)
+    meta = {
+        "version": version,
+        "key": key,
+        "compressed": True,
+        "anchor": (a18, b18, ax, ay),
+        "anchor_raw": data[0x18:0x20],
+    }
     if bpp not in (8, 24, 32):
         raise BgiError(f"{label} 不支援 bpp={bpp}")
     if version < 2:
@@ -1073,7 +1083,7 @@ def _rle(pixels: bytes) -> bytes:
     return bytes(out)
 
 
-def encode_cbg(width: int, height: int, pixels: bytes) -> bytes:
+def encode_cbg(width: int, height: int, pixels: bytes, anchor=None) -> bytes:
     if not (0 < width <= 0x7FFF and 0 < height <= 0x7FFF):
         raise BgiError(f"尺寸超出 BGI：{width}x{height}")
     expected = width * height * 4
@@ -1102,10 +1112,17 @@ def encode_cbg(width: int, height: int, pixels: bytes) -> bytes:
     for b in plain:
         checkxor ^= b
 
+    if anchor is None:
+        reserved = struct.pack("<II", 0, 0)
+    else:
+        a18, b18, ax, ay = anchor
+        reserved = struct.pack("<HHHH", int(a18), int(b18), int(ax), int(ay))
+        if len(reserved) != 8:
+            raise BgiError("錨點欄位必須係 4 個 u16")
     header = bytearray(b"CompressedBG___\x00")
     header += struct.pack("<HH", width, height)
     header += struct.pack("<I", 32)
-    header += struct.pack("<II", 0, 0)
+    header += reserved
     header += struct.pack("<I", len(packed))
     header += struct.pack("<I", 0)
     header += struct.pack("<I", len(enc))
@@ -1113,6 +1130,88 @@ def encode_cbg(width: int, height: int, pixels: bytes) -> bytes:
     if len(header) != 0x30:
         raise BgiError(f"header {len(header)} != 48")
     return bytes(header) + enc + compressed
+
+
+def format_anchor(anchor) -> str:
+    if not anchor:
+        return "無"
+    a, b, x, y = anchor
+    if (a, b, x, y) == (0, 0, 0, 0):
+        return "0,0（無錨點）"
+    return f"{x},{y}（flag {a},{b}）"
+
+
+def sidecar_path(image_path: str) -> str:
+    stem, _ext = os.path.splitext(image_path)
+    return stem + ".cbgmeta"
+
+
+def write_cbgmeta(path: str, anchor) -> None:
+    a, b, x, y = anchor
+    text = (
+        "# BMP-BGI-Converter-GUI-V2 錨點（CompressedBG 檔頭 0x18-0x1F）\n"
+        f"a={a}\n"
+        f"b={b}\n"
+        f"x={x}\n"
+        f"y={y}\n"
+    )
+    parent = os.path.dirname(os.path.abspath(path))
+    if parent:
+        os.makedirs(parent, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
+
+
+def read_cbgmeta(path: str):
+    if not os.path.isfile(path):
+        return None
+    vals = {}
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            k, v = line.split("=", 1)
+            vals[k.strip()] = int(v.strip(), 0)
+    if all(k in vals for k in ("a", "b", "x", "y")):
+        return (vals["a"], vals["b"], vals["x"], vals["y"])
+    return None
+
+
+def read_anchor_from_cbg_file(path: str):
+    try:
+        with open(path, "rb") as f:
+            data = f.read(0x20)
+    except OSError:
+        return None
+    if not data.startswith(b"CompressedBG___") or len(data) < 0x20:
+        return None
+    return struct.unpack_from("<HHHH", data, 0x18)
+
+
+def resolve_anchor(src: str, meta, orig_dir: str = None):
+    """回傳 (anchor_tuple_or_None, 來源說明)。來源係 CBG 就原樣保留（包括全 0）。"""
+    if meta and "anchor" in meta:
+        return meta["anchor"], "來源 CBG"
+    side = sidecar_path(src)
+    anc = read_cbgmeta(side)
+    if anc is not None:
+        return anc, os.path.basename(side)
+    folder = os.path.dirname(os.path.abspath(src))
+    stem = os.path.splitext(os.path.basename(src))[0]
+    search_dirs = [folder]
+    if orig_dir:
+        search_dirs.append(orig_dir)
+    for d in search_dirs:
+        if not d:
+            continue
+        for name in (stem, stem + ".cbg", stem + ".bin"):
+            p = os.path.join(d, name)
+            anc = read_anchor_from_cbg_file(p)
+            if anc is not None:
+                return anc, p
+    return None, None
+
 
 # ---------- GUI（單檔，介面跟 BMP-BGI-Converter-GUI） ----------
 import sys
@@ -1147,6 +1246,13 @@ HELP_TEXT = """
 4. 點解要 CompressedBG
    raw 32-bit 好大。1280x720 raw 約 3.6MB，CompressedBG v1 約 2MB。
    v2 可以再細少少，但 v1 已經夠遊戲用。
+
+5. V2 錨點（過場座標）
+   CompressedBG 檔頭 0x18–0x1F 係過場用嘅錨點，唔係空欄。解碼唔用呢 8 byte，
+   圖睇落一樣，但回封寫 0 會令過場畫面掉一半（例如 ECC_etc05 原檔係 640,360）。
+   本版解出 BMP／PNG 時會寫同名 .cbgmeta；回封自動讀 sidecar。
+   若舊圖未有 sidecar，可指定「原 CBG 資料夾」，按檔名抄返官方錨點。
+   冇來源就寫 0（舊行為），日誌會註明。
 
 預覽要 Pillow：pip install pillow
 轉檔本身唔使 Pillow。
@@ -1203,7 +1309,8 @@ def pil_from_pixels(width, height, bpp, pixels):
 class App:
     def __init__(self, root):
         self.root = root
-        root.title("BMP / PNG ↔ BGI / CompressedBG")
+        root.title("BMP-BGI-Converter-GUI-V2")
+        self.orig_dir_var = tk.StringVar()
         root.geometry("1120x760")
         self.input_var = tk.StringVar()
         self.output_var = tk.StringVar()
@@ -1223,6 +1330,9 @@ class App:
         ttk.Entry(top, textvariable=self.output_var, width=60).grid(row=1, column=1, padx=5, sticky=tk.EW)
         ttk.Button(top, text="選檔案", command=self.browse_out_file).grid(row=1, column=2, padx=2)
         ttk.Button(top, text="選資料夾", command=self.browse_out_dir).grid(row=1, column=3, padx=2)
+        ttk.Label(top, text="原 CBG 資料夾（可選）:").grid(row=2, column=0, sticky=tk.W)
+        ttk.Entry(top, textvariable=self.orig_dir_var, width=60).grid(row=2, column=1, padx=5, sticky=tk.EW)
+        ttk.Button(top, text="選資料夾", command=self.browse_orig_dir).grid(row=2, column=3, padx=2)
         top.columnconfigure(1, weight=1)
 
         mode_frame = ttk.LabelFrame(root, text="轉換模式", padding=10)
@@ -1295,6 +1405,11 @@ class App:
         d = filedialog.askdirectory()
         if d:
             self.output_var.set(d)
+
+    def browse_orig_dir(self):
+        d = filedialog.askdirectory()
+        if d:
+            self.orig_dir_var.set(d)
 
     def show_help(self):
         messagebox.showinfo("HELP", HELP_TEXT)
@@ -1378,7 +1493,14 @@ class App:
             self.status_var.set("預覽失敗")
             return
         label = meta.get("format", "?")
-        self.info_var.set(f"{label} | {w}x{h} | {bpp}bpp | {os.path.getsize(path_str)} bytes")
+        info = f"{label} | {w}x{h} | {bpp}bpp | {os.path.getsize(path_str)} bytes"
+        if meta.get("anchor") is not None:
+            info += f" | 錨點 {format_anchor(meta['anchor'])}"
+        else:
+            side = read_cbgmeta(sidecar_path(path_str))
+            if side is not None:
+                info += f" | 錨點 {format_anchor(side)}（.cbgmeta）"
+        self.info_var.set(info)
         self.status_var.set(f"{label} {w}x{h}")
         if img is None:
             self.preview_label.config(image="", text="未安裝 Pillow，無法預覽\n轉檔功能正常可用")
@@ -1424,6 +1546,9 @@ class App:
         mode = self.mode_var.get()
         keep24 = self.keep24_var.get()
         image_fmt = self.image_fmt_var.get()
+        orig_dir = self.orig_dir_var.get().strip() or None
+        if orig_dir and not os.path.isdir(orig_dir):
+            orig_dir = None
         jobs = []
         if os.path.isdir(inp):
             outdir = out or inp
@@ -1470,21 +1595,34 @@ class App:
                     msg = f"[{meta.get('format', '?')}→BGI] {os.path.basename(src)} → {os.path.basename(dst)} ({w}x{h}, {out_bpp}bpp, {os.path.getsize(dst)} bytes)"
                 elif job_type == "to_cbg":
                     rgba = to_rgba(w, h, bpp, pixels)
-                    blob = encode_cbg(w, h, rgba)
+                    anc, anc_from = resolve_anchor(src, meta, orig_dir)
+                    blob = encode_cbg(w, h, rgba, anc)
                     parent = os.path.dirname(os.path.abspath(dst))
                     if parent:
                         os.makedirs(parent, exist_ok=True)
                     with open(dst, "wb") as f:
                         f.write(blob)
                     msg = f"[{meta.get('format', '?')}→CBG] {os.path.basename(src)} → {os.path.basename(dst)} ({w}x{h}, {len(rgba)+16} → {len(blob)} bytes)"
+                    if anc is not None:
+                        msg += f" 錨點 {format_anchor(anc)}"
+                        if anc_from:
+                            msg += f" ← {anc_from}"
+                    else:
+                        msg += " 錨點 0（無 .cbgmeta／原 CBG 可抄）"
                 elif job_type == "to_png":
                     rgba = to_rgba(w, h, bpp, pixels)
                     write_png(dst, w, h, 32, rgba)
                     msg = f"[{meta.get('format', '?')}→PNG] {os.path.basename(src)} → {os.path.basename(dst)} ({w}x{h}, 32bpp alpha)"
+                    if meta.get("anchor") is not None:
+                        write_cbgmeta(sidecar_path(dst), meta["anchor"])
+                        msg += f" 錨點 {format_anchor(meta['anchor'])} → {os.path.basename(sidecar_path(dst))}"
                 else:
                     rgba = to_rgba(w, h, bpp, pixels)
                     write_bmp_v4(dst, w, h, 32, rgba)
                     msg = f"[{meta.get('format', '?')}→BMP] {os.path.basename(src)} → {os.path.basename(dst)} ({w}x{h}, 32bpp)"
+                    if meta.get("anchor") is not None:
+                        write_cbgmeta(sidecar_path(dst), meta["anchor"])
+                        msg += f" 錨點 {format_anchor(meta['anchor'])} → {os.path.basename(sidecar_path(dst))}"
                 success += 1
                 self.root.after(0, lambda m=msg: self.log(m))
             except Exception as e:
