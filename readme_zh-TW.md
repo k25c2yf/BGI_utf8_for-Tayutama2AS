@@ -147,7 +147,7 @@ Github https://github.com/k25c2yf/BGI_utf8_for-Tayutama2AS/releases
 - 專案發起者 [k25c2yf](https://github.com/k25c2yf)
 - 校對&管理 [KJZH001](https://github.com/KJZH001)
 - 校對&翻譯 [Akane-Haruka](https://github.com/Akane-Haruka)
-- OP 時軸\後期：[丨Pegasus丨](https://space.bilibili.com/33339833)
+- OP 時軸&後期：[丨Pegasus丨](https://space.bilibili.com/33339833)
 
 ## 更新歷史
 - 2023.6.16 專案立項
